@@ -58,11 +58,11 @@ public class UserController {
 	 * @return
 	 * @author gang.yan
 	 */
-	@GetMapping("/from")
+	@GetMapping("/form")
 	public ModelAndView creatForm(Model model) {
 		model.addAttribute("user",new User());
 		model.addAttribute("title","创建用户");
-		return new ModelAndView("user/from","userModel",model);
+		return new ModelAndView("users/form","userModel",model);
 	}
 	
 	/**
@@ -75,6 +75,6 @@ public class UserController {
 	@PostMapping
 	public ModelAndView saveorupdateUser(User user) {
 		user = userRepository.saveOrUpdateUser(user);
-		return new ModelAndView("redirect/users");//重定向到list页面
+		return new ModelAndView("redirect:/users");//重定向到list页面
 	}
 }
