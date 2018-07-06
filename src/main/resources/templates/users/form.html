@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<title th:text="${userModel.title}">welcome</title>
+<meta charset="UTF-8">
+</head>
+<body>
+
+<div>
+    <a href="/users/form.html">创建用户</a>
+</div>
+
+<div th:replace="~{fragments/footer::footer}"> </div>
+</body>
+</html>
