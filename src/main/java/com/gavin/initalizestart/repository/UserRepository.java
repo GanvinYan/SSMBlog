@@ -28,7 +28,7 @@ public interface UserRepository {
 	 * @param id
 	 * @author gang.yan
 	 */
-	void deleteUser(String id);
+	void deleteUser(Long id);
 	
 	/**
 	 *根据id查询用户 
@@ -37,7 +37,7 @@ public interface UserRepository {
 	 * @return
 	 * @author gang.yan
 	 */
-	User getUserById(String id);
+	User getUserById(Long id);
 	
 	/**
 	 *获取用户列表 

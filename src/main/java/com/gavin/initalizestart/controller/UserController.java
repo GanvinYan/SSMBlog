@@ -45,7 +45,7 @@ public class UserController {
 	 * @author gang.yan
 	 */
 	@GetMapping("{id}")
-	public ModelAndView view(@PathVariable("id") String id,Model model) {
+	public ModelAndView view(@PathVariable("id") Long id,Model model) {
 		User user = userRepository.getUserById(id);
 		model.addAttribute("user",user);
 		model.addAttribute("title","查看用户");

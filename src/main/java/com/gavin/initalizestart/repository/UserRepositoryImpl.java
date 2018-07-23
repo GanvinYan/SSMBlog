@@ -20,12 +20,13 @@ import com.gavin.initalizestart.domain.User;
 public class UserRepositoryImpl implements UserRepository{
 
 	private static AtomicLong counter = new AtomicLong();//用来做计数 会有唯一的Id
-	private final ConcurrentMap<String,User> userMap = new ConcurrentHashMap<>();
+	private final ConcurrentMap<Long,User> userMap = new ConcurrentHashMap<>();
 	@Override
 	public User saveOrUpdateUser(User user) {
-		String id =user.getId();
+		Long id =user.getId();
 		if (id== null) {//新建
-			id = String.valueOf(counter.incrementAndGet()); 
+//			id = String.valueOf(counter.incrementAndGet()); 
+			id = counter.incrementAndGet(); 
 			user.setId(id);
 		} 
 		this.userMap.put(id, user);
@@ -33,12 +34,12 @@ public class UserRepositoryImpl implements UserRepository{
 	}
 
 	@Override
-	public void deleteUser(String id) {
+	public void deleteUser(Long id) {
 		this.userMap.remove(id);
 	}
 
 	@Override
-	public User getUserById(String id) {
+	public User getUserById(Long id) {
 		
 		return this.userMap.get(id);
 	}
