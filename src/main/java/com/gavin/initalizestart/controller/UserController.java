@@ -64,7 +64,25 @@ public class UserController {
 		model.addAttribute("title","创建用户");
 		return new ModelAndView("users/form","userModel",model);
 	}
-	
+	/**
+	 * 删除
+	 * 创建时间: 2018年7月25日 下午10:12:01 
+	 * @param id
+	 * @return
+	 * @author gang.yan
+	 */
+	@GetMapping("/delete/{id}")
+	public ModelAndView delte(@PathVariable("id") Long id) {
+		userRepository.deleteUser(id);
+		return new ModelAndView("redirect:/users");//重定向到list
+	}
+	@GetMapping("/modify/{id}")
+	public ModelAndView modify(@PathVariable("id") Long id,Model model) {
+		User user = userRepository.getUserById(id);
+		model.addAttribute("user",user);
+		model.addAttribute("title","修改用户");
+		return new ModelAndView("users/form","userModel",model);
+	}
 	/**
 	 * 保存或修改用户
 	 * 创建时间: 2018年7月6日 下午3:59:32 
