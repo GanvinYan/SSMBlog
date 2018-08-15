@@ -1,13 +1,22 @@
 package com.gavin.initalizestart.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+
 /**
  * 描述：User 实体
  * 创建时间: 2018年7月5日 下午2:22:21 
  *
  * @author gang.yan
  */
-
+@Entity
 public class User {
+	
+	@Id  // 主键
+    @GeneratedValue(strategy=GenerationType.IDENTITY) // 自增长策略
 	private Long id;
 	private String name;
 	private String email;
