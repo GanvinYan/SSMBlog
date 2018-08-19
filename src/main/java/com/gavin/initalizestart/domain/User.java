@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.xml.bind.annotation.XmlRootElement;
 
 
 /**
@@ -13,15 +14,17 @@ import javax.persistence.Id;
  * @author gang.yan
  */
 @Entity
+@XmlRootElement // MediaType 转为 XML
 public class User {
 	
 	@Id  // 主键
-    @GeneratedValue(strategy=GenerationType.IDENTITY) // 自增长策略
+	@GeneratedValue(strategy=GenerationType.IDENTITY) // 自增长策略
+	
 	private Long id;
 	private String name;
 	private String email;
 	
-	public User() { //无参构造函数
+	protected User() {  // JPA 的规范要求无参构造函数；设为 protected 防止直接使用 
 		
 	}
 	public User(Long id,String name,String email) {
@@ -47,4 +50,11 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	@Override
+    public String toString() {
+        return String.format(
+                "User[id=%d, name='%s', email='%d']",
+                id, name, email);
+    }
 }
