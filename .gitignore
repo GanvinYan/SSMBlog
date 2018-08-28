@@ -26,3 +26,4 @@
 /nbdist/
 /.nb-gradle/
 bin/
+elasticsearch-2.4.4/
