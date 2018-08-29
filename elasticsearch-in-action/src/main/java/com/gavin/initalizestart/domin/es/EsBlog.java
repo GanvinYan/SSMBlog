@@ -62,8 +62,8 @@ public class EsBlog implements Serializable{
 	@Override
     public String toString() {
         return String.format(
-                "User[id=%d, title='%s', content='%s']",
-                id, title, content);
+                "EsBlog[id=%s, title='%s',summary='%s', content='%s']",
+                id, title, summary,content);
     }
 	
 }

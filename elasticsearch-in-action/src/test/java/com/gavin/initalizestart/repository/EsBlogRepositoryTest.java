@@ -10,7 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.gavin.initalizestart.domin.es.EsBlog;
@@ -54,7 +53,7 @@ public class EsBlogRepositoryTest  {
 		 assertThat(page.getTotalElements()).isEqualTo(2);
 		 
 		 System.out.println("------Start");
-		 for (EsBlog blog:page.getContent()) {
+		 for (EsBlog blog  : page.getContent()) {
 			System.out.println(blog.toString());
 		}
 		 System.out.println("------End");
