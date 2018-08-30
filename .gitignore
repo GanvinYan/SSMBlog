@@ -26,5 +26,5 @@
 /nbdist/
 /.nb-gradle/
 bin/
-/target/
+target/
 elasticsearch-2.4.4/
