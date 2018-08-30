@@ -17,7 +17,7 @@ import com.gavin.initalizestart.domin.es.EsBlog;
 /**
  * 描述：EsBlog Repository 接口
  * 创建时间: 2018年8月28日 下午11:50:53 
- *
+ *http://localhost:8080/blogs?title=%E6%80%9D&summary=%E7%9B%B8%E6%80%9D&content=%E7%9B%B8%E6%80%9D
  * @author gang.yan
  */
 @RunWith(SpringRunner.class)
