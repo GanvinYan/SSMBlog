@@ -1,5 +1,6 @@
 .gradle
-/build/
+.class
+build/
 !gradle/wrapper/gradle-wrapper.jar
 
 ### STS ###
@@ -28,3 +29,4 @@
 bin/
 target/
 elasticsearch-2.4.4/
+
