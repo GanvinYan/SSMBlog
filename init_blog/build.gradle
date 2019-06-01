@@ -55,8 +55,18 @@ dependencies {
 	
 	// 添加 MySQL连接驱动 的依 赖
 	compile('mysql:mysql-connector-java:5.1.46')
+
+	// slf4j 日志
+    compile('org.slf4j:slf4j-api:1.7.25')
+
+    //lombok
+    compile ('org.projectlombok:lombok:1.16.16')
+    annotationProcessor ('org.projectlombok:lombok:1.16.16')
+
+	// 添加  Apache Commons Lang 依赖
+	compile('org.apache.commons:commons-lang3:3.5')
 	
-	//添加 H2 的依赖
+    //添加 H2 的依赖
 	runtime('com.h2database:h2:1.4.193')
 	
 	// 该依赖对于编译测试是必须的，默认包含编译产品依赖和编译时依

@@ -1,10 +1,9 @@
 package com.gavin.initalizestart.repository;
 
-import java.util.List;
-
-import org.springframework.data.repository.CrudRepository;
-
 import com.gavin.initalizestart.domain.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  * 描述：User Repository 接口
@@ -12,7 +11,10 @@ import com.gavin.initalizestart.domain.User;
  *
  * @author gang.yan
  */
+public interface UserRepository extends JpaRepository<User, Long> {
 
-public interface UserRepository extends  CrudRepository<User, Long>{
+    Page<User> findByNameLike(String name, Pageable pageable);
+
+    User findByUsername(String username);
 
 }

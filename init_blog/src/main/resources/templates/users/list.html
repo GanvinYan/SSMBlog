@@ -4,34 +4,81 @@
 <head th:replace="~{fragments/header::header}">
 </head>
 <body>
+<div class="crad-header bg-dark font-white">
+	<div class="input-group col-md-7 col-xl-6">
+		<input class="input-group" class="form-control" id="searchName" placeholder="输入用户名称进行搜索">
+		<span class="input-group-btn">
+			<button class="btn btn-secondary" type="button" id="searchNameBtn">
+				<i class="fa fa-search" aria-hidden="true"></i>
+			</button>
+		</span>
+		<a class="btn btn-primary" data-toggle="modal" data-target="#flipFlop" role="button" id="addUser">
+			<i class="fa fa-plus" aria-hidden="true"></i>
+		</a>
+	</div>
+</div>
+
 <!--Page content  -->
-<div class="container blog-conten-container">
-	<div>
-	    <a class="btn btn-default" href="/users/form.html" th:herf="@{/users/form}">创建用户</a>
-	</div>
-	<table class="table table-stripet table-hover" >
-	   <thead class="thead-dark">
-	    <tr>
-	        <td>ID</td>
-	        <td>Age</td>
-	        <td>Name</td>
-	        <td>action</td>
-	    </tr>
-	    </thead>
-	    <tbody>
-	    <tr th:if="${userModel.userList.size()} eq 0">
-	        <td colspan="3">没有用户信息！！</td>
-	    </tr>
-	    <tr th:each="user : ${userModel.userList}">
-	        <td th:text="${user.id}"></td>
-	        <td th:text="${user.name}"></td>
-	        <td th:text="${user.email}"></td>
-	        <td><a href="view.html" th:href="@{'/users/' + ${user.id}}"
-	               th:text="${user.name}"></a></td>
-	    </tr>
-	    </tbody>
+<div id="mainContainerRepleace" class="row ">
+	<table class="table table-stripet table-hover">
+		<thead class="thead-dark">
+		<tr>
+			<td data-field="id">ID</td>
+			<td data-field="username">账号</td>
+			<td data-field="name">姓名</td>
+			<th data-field="email">邮箱</th>
+			<th data-field="opration">操作</th>
+			<td>Name</td>
+			<td>action</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr th:if="${userModel.userList.size()} eq 0">
+			<td colspan="3">没有用户信息！！</td>
+		</tr>
+		<tr th:each="user : ${userModel.userList}">
+			<td th:text="${user.id}"></td>
+			<td th:text="${user.username}"></td>
+			<td th:text="${user.name}"></td>
+			<td th:text="${user.email}"></td>
+			<td>
+				<div>
+					<a class="blog-edit-uset" data-toggle="model"
+					   data-target="#flipFlap" fole="button"
+					   data-th-attr="userId=${user.id}">
+						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+					</a>
+				<a class="clog-delete-uder"	 role="button"
+				   data-th-attr="userId=${user.id}">
+					<i class="fa fa-times" aria-hidden="true"></i>
+				</a>
+				</div>
+			</td>
+		</tr>
+		</tbody>
 	</table>
+</div>
+
+<!-- The model -->
+<div>
+	<div class="modal fade" id="flipFlop" tabindex="-1" role="dialog"
+	aria-labelledby="modalLable" aria-hidden="true">
+		<div class="madal-header">
+			<h4 calss = "modal-title" id="modalLable">新增/编辑</h4>
+			<button type="button" class="close" dara-dismiss ="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="modal-body" id="userFormContainer"></div>
+		<div class="madol-footer">
+			<button class="btn btn-primary" data-dismiss = "modal" id ="submitEdit">提交</button>
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		</div>
 	</div>
+
+</div>
+
 <div th:replace="~{fragments/footer::footer}"> </div>
+<script src=".././js/users/main.js" th:src="@{/js/users/main.js}"></script>
 </body>
 </html>

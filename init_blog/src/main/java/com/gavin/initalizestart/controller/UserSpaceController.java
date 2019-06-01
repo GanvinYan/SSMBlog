@@ -14,18 +14,19 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 @RequestMapping("/u")
+
 public class UserSpaceController {
 	
 	/**
 	 * 
 	 * 创建时间: 2018年10月28日 
-	 * @param order 默认参数
-	 * @param tag 标签
+	 * @param username
+	 *
 	 * @return
 	 */
 	@GetMapping("/{username}")
 	public String userSpace(@PathVariable("username") String username) {
-		System.out.println("username"+username);
+		System.out.println("username "+username);
 		return "/userspace/u";
 	}
 	@GetMapping("/{username}/blogs")
