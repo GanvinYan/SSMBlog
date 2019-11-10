@@ -32,8 +32,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private UserRepository userRepository;
 
     /**
      * 查询所有用户

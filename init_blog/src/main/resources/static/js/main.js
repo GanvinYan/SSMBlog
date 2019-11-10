@@ -7,8 +7,8 @@
 
 // DOM 加载完再执行
 $(function() {
- 
-	// 返回顶部的效果事件
+
+    // 返回顶部的效果事件
     NProgress.start();
 
     $(window).scroll(function(){  //只要窗口滚动,就触发下面代码

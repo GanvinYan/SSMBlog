@@ -1,15 +1,14 @@
 /*!
- * Bolg main JS.
- * 
- * @since: 1.0.0 2019/3/9
+  * Bolg main JS.
  *
+ * @since: 1.0.0 2019/9/8
+ * @author
  */
 "use strict";
 //# sourceURL=main.js
- 
+
 // DOM 加载完再执行
 $(function() {
-
 	var _pageSize; // 存储用于搜索
 
 	// 根据用户名、页面索引、页面大小获取用户列表
@@ -107,7 +106,7 @@ $(function() {
 			},
 			success: function(data){
 				if (data.success) {
-					// 从新刷新主界面
+					// 重新刷新主界面
 					getUersByName(0, _pageSize);
 				} else {
 					toastr.error(data.message);
@@ -118,6 +117,4 @@ $(function() {
 			}
 		});
 	});
-	
-	
 });

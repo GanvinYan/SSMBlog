@@ -45,6 +45,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Page<User> listUsersByNameLike(String name, Pageable pageable) {
-        return null;
+        // 模糊查询
+        name = "%" + name + "%";
+        Page<User> users = userRepository.findByNameLike(name, pageable);
+        return users;
     }
 }
