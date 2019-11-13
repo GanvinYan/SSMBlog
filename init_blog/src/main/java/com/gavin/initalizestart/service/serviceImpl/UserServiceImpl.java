@@ -20,9 +20,16 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * @Description 保存增加事务注解
+     * @Param [user]
+     * @return com.gavin.initalizestart.domain.User
+     * @Author gang.yan
+     * @Date 20:14 2019/11/13
+     */
     @Override
     @Transactional
-    public User saveuser(User user) {
+    public User saveUser(User user) {
         return userRepository.save(user);
     }
 
@@ -35,12 +42,12 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public void removeUser(Long id) {
-         userRepository.delete(id);
+        userRepository.delete(id);
     }
 
     @Override
     public User getUserById(Long id) {
-        return null;
+        return userRepository.getOne(id);
     }
 
     @Override

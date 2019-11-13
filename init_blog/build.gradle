@@ -1,27 +1,27 @@
 buildscript {
-	// ext 用于定义动态属性
-	ext {
-		springBootVersion = '1.5.14.RELEASE'
-	}
-	
-	// 自定义  Thymeleaf 和 Thymeleaf Layout Dialect 的版本
-	ext['thymeleaf.version'] = '3.0.3.RELEASE'
-	ext['thymeleaf-layout-dialect.version'] = '2.2.0'
-	
-	// 自定义  Hibernate 的版本
-	ext['hibernate.version'] = '5.2.8.Final'
-	
-	repositories {
-		//mavenCentral()
-		maven {
-			url 'http://maven.aliyun.com/nexus/content/groups/public/'
-		}
-	}
-	// 依赖关系
-	dependencies {
-		// classpath 声明说明了在执行其余的脚本时，ClassLoader 可以使用这些依赖项
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-	}
+    // ext 用于定义动态属性
+    ext {
+        springBootVersion = '1.5.14.RELEASE'
+    }
+
+    // 自定义  Thymeleaf 和 Thymeleaf Layout Dialect 的版本
+    ext['thymeleaf.version'] = '3.0.3.RELEASE'
+    ext['thymeleaf-layout-dialect.version'] = '2.2.0'
+
+    // 自定义  Hibernate 的版本
+    ext['hibernate.version'] = '5.2.8.Final'
+
+    repositories {
+        //mavenCentral()
+        maven {
+            url 'http://maven.aliyun.com/nexus/content/groups/public/'
+        }
+    }
+    // 依赖关系
+    dependencies {
+        // classpath 声明说明了在执行其余的脚本时，ClassLoader 可以使用这些依赖项
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
 }
 
 // 使用插件
@@ -36,39 +36,42 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
-	//mavenCentral()
-	maven {
-			url 'http://maven.aliyun.com/nexus/content/groups/public/'
-		}
+    //mavenCentral()
+    maven {
+        url 'http://maven.aliyun.com/nexus/content/groups/public/'
+    }
 }
 
 
 dependencies {
-	//Spring-web依赖
-	compile('org.springframework.boot:spring-boot-starter-web')
+    //Spring-web依赖
+    compile('org.springframework.boot:spring-boot-starter-web')
 
-	// 添加 Thymeleaf 的依赖
-	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
-	
-	// 添加 Spring Data JPA 的依赖
-	compile('org.springframework.boot:spring-boot-starter-data-jpa')
-	
-	// 添加 MySQL连接驱动 的依 赖
-	compile('mysql:mysql-connector-java:5.1.46')
+    // 添加 Thymeleaf 的依赖
+    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 
-	// slf4j 日志
+    // 添加  Spring Security 依赖
+    compile('org.springframework.boot:spring-boot-starter-security')
+
+    // 添加 Spring Data JPA 的依赖
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+
+    // 添加 MySQL连接驱动 的依 赖
+    compile('mysql:mysql-connector-java:5.1.46')
+
+    // slf4j 日志
     compile('org.slf4j:slf4j-api:1.7.25')
 
     //lombok
-    compile ('org.projectlombok:lombok:1.16.16')
-    annotationProcessor ('org.projectlombok:lombok:1.16.16')
+    compile('org.projectlombok:lombok:1.16.16')
+    annotationProcessor('org.projectlombok:lombok:1.16.16')
 
-	// 添加  Apache Commons Lang 依赖
-	compile('org.apache.commons:commons-lang3:3.5')
-	
-    //添加 H2 的依赖
-	runtime('com.h2database:h2:1.4.193')
-	
-	// 该依赖对于编译测试是必须的，默认包含编译产品依赖和编译时依
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+    // 添加  Apache Commons Lang 依赖
+    compile('org.apache.commons:commons-lang3:3.5')
+
+    //添加 H2 的依赖 
+    runtime('com.h2database:h2:1.4.193')
+
+    // 该依赖对于编译测试是必须的，默认包含编译产品依赖和编译时依
+    testCompile('org.springframework.boot:spring-boot-starter-test')
 }

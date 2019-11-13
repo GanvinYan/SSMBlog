@@ -28,6 +28,7 @@
 			<th data-field="username">账号</th>
 			<th data-field="name">姓名</th>
 			<th data-field="email">邮箱</th>
+			<th data-field="authorities">角色</th>
 			<th data-field="opration">操作</th>
 		</tr>
 		</thead>
@@ -40,6 +41,7 @@
 			<td th:text="${user.username}"></td>
 			<td th:text="${user.name}"></td>
 			<td th:text="${user.email}"></td>
+			<td th:text="${user.authorities}"></td>
 			<td>
 				<div>
 					<button class="btn btn-primary blog-edit-user" data-toggle="modal"

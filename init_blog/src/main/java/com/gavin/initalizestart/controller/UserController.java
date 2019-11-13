@@ -1,7 +1,10 @@
 package com.gavin.initalizestart.controller;
 
 
+import com.gavin.initalizestart.domain.Authority;
+import com.gavin.initalizestart.service.AuthorityService;
 import com.gavin.initalizestart.service.UserService;
+import com.gavin.initalizestart.util.ConstraintViolationExceptionHandler;
 import com.gavin.initalizestart.vo.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,13 +12,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gavin.initalizestart.domain.User;
-import com.gavin.initalizestart.repository.UserRepository;
 
+import javax.validation.ConstraintViolationException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,6 +38,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private AuthorityService authorityService;
 
     /**
      * 查询所有用户
@@ -51,7 +59,7 @@ public class UserController {
         Page<User> page = userService.listUsersByNameLike(name, pageable);
         List<User> list = page.getContent();    // 当前所在页面数据列表
 
-        log.info("-----");
+//        log.info("----- {} {}",name,pageSize);
 
         model.addAttribute("page", page);
         model.addAttribute("userList", list);
@@ -77,9 +85,34 @@ public class UserController {
 
 
     @PostMapping
-    public ResponseEntity<Response> create(User user, long author) {
+    public ResponseEntity<Response> create(User user, Long authorityId) {
+        List<Authority> authorities = new ArrayList<>();
+        authorities.add(authorityService.getAuthorityById(authorityId));
+        user.setAuthorities(authorities);
 
-        return null;
+        if(user.getId() == null) {
+            user.setEncodePassword(user.getPassword()); // 加密密码
+        }else {
+            // 判断密码是否做了变更
+            User originalUser = userService.getUserById(user.getId());
+            String rawPassword = originalUser.getPassword();
+            PasswordEncoder encoder = new BCryptPasswordEncoder();
+            String encodePasswd = encoder.encode(user.getPassword());
+            boolean isMatch = encoder.matches(rawPassword, encodePasswd);
+            if (!isMatch) {
+                user.setEncodePassword(user.getPassword());
+            }else {
+                user.setPassword(user.getPassword());
+            }
+        }
+
+        try {
+            userService.saveUser(user);
+        }  catch (ConstraintViolationException e)  {
+            return ResponseEntity.ok().body(new Response(false, ConstraintViolationExceptionHandler.getMessage(e)));
+        }
+
+        return ResponseEntity.ok().body(new Response(true, "处理成功", user));
     }
 
     /**
