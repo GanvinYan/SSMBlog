@@ -13,6 +13,7 @@ $(function() {
 
 	// 根据用户名、页面索引、页面大小获取用户列表
 	function getUersByName(pageIndex, pageSize) {
+		debugger
 		$.ajax({
 			url: "/users",
 			contentType : 'application/json',
@@ -70,7 +71,6 @@ $(function() {
 
 	// 提交变更后，清空表单
 	$("#submitEdit").click(function() {
-		debugger
 		$.ajax({
 			url: "/users",
 			type: 'POST',
@@ -100,7 +100,7 @@ $(function() {
 
 
 		$.ajax({
-			url: "/users/" + $(this).attr("userId") ,
+			url: "/users/delete/" + $(this).attr("userId") ,
 			type: 'DELETE',
 			beforeSend: function(request) {
 				request.setRequestHeader(csrfHeader, csrfToken); // 添加  CSRF Token
@@ -108,6 +108,7 @@ $(function() {
 			success: function(data){
 				if (data.success) {
 					// 重新刷新主界面
+					debugger
 					getUersByName(0, _pageSize);
 				} else {
 					toastr.error(data.message);

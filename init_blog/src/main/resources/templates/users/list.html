@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head th:replace="~{fragments/header::header}">
+<!--<head th:replace="~{fragments/header::header}">-->
 	<meta charset="UTF-8">
 </head>
 <body>
@@ -47,11 +47,11 @@
 					<button class="btn btn-primary blog-edit-user" data-toggle="modal"
 					   data-target="#flipFlop" role="button"
 					   data-th-attr="userId=${user.id}">
-						<i class="fa fa-pencil-square-o" aria-hidden="true">*</i>
+						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 					</button>
 					<button class="btn btn-warning blog-delete-user" role="button"
 							data-th-attr="userId=${user.id}">
-					    <i class="fa fa-times" aria-hidden="true">X</i>
+					    <i class="fa fa-times" aria-hidden="true"></i>
 				    </button>
 				</div>
 			</td>
@@ -82,7 +82,7 @@
 	</div>
 </div>
 
-<div th:replace="~{fragments/footer::footer}"> </div>
+<!--<div th:replace="~{fragments/footer::footer}"> </div>-->
 <script src=".././js/users/main.js" th:src="@{/js/users/main.js}"></script>
 </body>
 </html>

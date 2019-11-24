@@ -43,7 +43,6 @@ public class Authority implements GrantedAuthority {
      */
     @Override
     public String getAuthority(){
-        System.out.println("----");
         return name;
     }
 }

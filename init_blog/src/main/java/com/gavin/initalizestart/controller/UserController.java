@@ -59,7 +59,7 @@ public class UserController {
         Page<User> page = userService.listUsersByNameLike(name, pageable);
         List<User> list = page.getContent();    // 当前所在页面数据列表
 
-//        log.info("----- {} {}",name,pageSize);
+        log.info("-----------{}",page);
 
         model.addAttribute("page", page);
         model.addAttribute("userList", list);
@@ -123,7 +123,7 @@ public class UserController {
      * @return
      * @author gang.yan
      */
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity delte(@PathVariable("id") Long id, Model model) {
         try {
             userService.removeUser(id);
