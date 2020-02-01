@@ -33,3 +33,5 @@ elasticsearch-2.4.4/
 
 gradle-wrapper.properties
 
+
+init_blog/logs/
