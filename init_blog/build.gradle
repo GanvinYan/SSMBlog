@@ -63,7 +63,9 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
 
     // 添加 MySQL连接驱动 的依 赖
-    compile('mysql:mysql-connector-java:5.1.46')
+//    compile('mysql:mysql-connector-java:5.1.46')
+
+    compile files('lib/ojdbc6.jar')
 
     // slf4j 日志
     compile('org.slf4j:slf4j-api:1.7.25')

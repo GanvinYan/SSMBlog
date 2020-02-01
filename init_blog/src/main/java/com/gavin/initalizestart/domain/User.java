@@ -24,10 +24,12 @@ import java.util.List;
  */
 @Entity
 @XmlRootElement // MediaType 转为 XML
+@Table(name="user_bl")
 public class User implements UserDetails {
 
     @Id  // 主键
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // 自增长策略
+//  @GeneratedValue(strategy = GenerationType.IDENTITY) // 自增长策略
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @NotEmpty(message = "姓名不能为空")
@@ -93,6 +95,8 @@ public class User implements UserDetails {
         this.email = email;
     }
 
+
+    @Override
     public String getUsername() {
         return username;
     }
