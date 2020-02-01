@@ -135,8 +135,17 @@ public class User implements UserDetails {
         this.authorities = authorities;
     }
 
+    @Override
     public String getPassword() {
         return password;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public void setPassword(String password) {
