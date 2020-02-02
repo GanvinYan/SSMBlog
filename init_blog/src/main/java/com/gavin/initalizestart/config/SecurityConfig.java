@@ -60,6 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().sameOrigin();//允许来自同一来源的H2控制台的访问请求
     }
 
+    @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth)throws Exception{
         auth.userDetailsService(userDetailsService);
         auth.authenticationProvider(authenticationProvider());
