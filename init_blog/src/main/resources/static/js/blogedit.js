@@ -18,8 +18,8 @@ $(function() {
         },
         resize:'vertical',
         localStorage:'md',
-        imgurl: 'http://192.168.1.1:8080/upload',
-        base64url: 'http://192.168.1.1:8080/base64'
+        imgurl: 'http://127.0.0.1:8080/upload',
+        base64url: 'http://127.0.0.1:8080/base64'
     });
     
     // 初始化标签控件
