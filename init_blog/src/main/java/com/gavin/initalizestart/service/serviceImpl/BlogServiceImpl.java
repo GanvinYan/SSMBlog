@@ -43,7 +43,8 @@ public class BlogServiceImpl implements BlogService {
     public Page<Blog> listBlogsByTitleLike(User user, String title, Pageable pageable) {
         // 模糊查询
         title = "%" + title + "%";
-        Page<Blog> blogs = blogRepository.findByTitleLikeAndUserOrTagslikeAndUserOrderByCreateTimeDesc(title, user, pageable);
+        String tags = title;
+        Page<Blog> blogs = blogRepository.findByTitleLikeAndUserOrTagsLikeAndUserOrderByCreateTimeDesc(title, user,tags, pageable);
         return blogs;
     }
 
