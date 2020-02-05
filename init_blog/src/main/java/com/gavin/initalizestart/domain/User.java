@@ -51,6 +51,7 @@ public class User implements UserDetails {
     @Column(length = 100)
     private String password;
 
+    //头像图片地址
     @Column(length = 200)
     private String avatar;
 

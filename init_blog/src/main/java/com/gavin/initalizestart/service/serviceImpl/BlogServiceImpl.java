@@ -1,12 +1,14 @@
 package com.gavin.initalizestart.service.serviceImpl;
 
 import com.gavin.initalizestart.domain.Blog;
+import com.gavin.initalizestart.domain.Comment;
 import com.gavin.initalizestart.domain.User;
 import com.gavin.initalizestart.repository.BlogRepository;
 import com.gavin.initalizestart.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -59,7 +61,23 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public void readingIncrease(Long id) {
         Blog blog = blogRepository.findOne(id);
-        blog.setReading(blog.getReading() + 1);
+        blog.setReadSize(blog.getReadSize() + 1);
         this.saveBlog(blog);
+    }
+
+    @Override
+    public Blog creatCommet(Long blogId, String commentCont) {
+        Blog originalBlog = blogRepository.findOne(blogId);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Comment comment = new Comment(user, commentCont);
+        originalBlog.addComment(comment);
+        return this.saveBlog(originalBlog);
+    }
+
+    @Override
+    public void removeComment(Long blogId, Long commetId) {
+        Blog originalBlog = blogRepository.findOne(blogId);
+        originalBlog.removeComment(commetId);
+        this.saveBlog(originalBlog);
     }
 }

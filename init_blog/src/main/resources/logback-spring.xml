@@ -75,6 +75,15 @@ debug：当此属性设置为true时，将打印出logback内部日志信息，�
         <appender-ref ref="syslog"/>
         <appender-ref ref="errorlog"/>
     </logger>
+
+    <!--  查看查询中命名参数的值  -->
+    <logger name="org.hibernate.SQL" level="DEBUG"/>
+<!--    <logger name="org.hibernate.engine.QueryParameters" level="DEBUG"/>-->
+<!--    <logger name="org.hibernate.engine.query.HQLQueryPlan" level="DEBUG"/>-->
+
+    <!-- 为了显示参数 -->
+    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE"/>
+    <!--    <logger name="org.hibernate.type.descriptor.sql.BasicExtractor" level="TRACE"/>-->
     <!--<logger level="DEBUG">-->
     <!--<appender-ref ref="syslog"/>-->
     <!--</logger>-->

@@ -174,7 +174,6 @@ public class UserSpaceController {
             if(principal != null && username.equals(principal.getUsername())){
                 isBlogOwner = true;
             }
-
         }
 
         model.addAttribute("isBlogOwner", isBlogOwner);
