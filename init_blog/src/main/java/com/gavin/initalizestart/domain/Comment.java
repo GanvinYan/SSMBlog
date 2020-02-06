@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name="comment_bl")
+@Table(name = "comment_bl")
 public class Comment implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -16,6 +16,7 @@ public class Comment implements Serializable {
     //用户唯一标示
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    //  @GeneratedValue(strategy = GenerationType.IDENTITY) // 自增长策略
     private Long id;
 
     //评论内容

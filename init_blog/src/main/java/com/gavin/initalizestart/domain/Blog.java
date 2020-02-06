@@ -72,8 +72,8 @@ public class Blog implements Serializable {
     /**
      *  点赞量
      */
-    @Column(name = "likeSize")
-    private Integer likeSize = 0;
+    @Column(name = "voteSize")
+    private Integer voteSize = 0;
 
     /**
      * 标签
@@ -170,12 +170,12 @@ public class Blog implements Serializable {
         this.commentSize = commentSize;
     }
 
-    public Integer getLikeSize() {
-        return likeSize;
+    public Integer getVoteSize() {
+        return voteSize;
     }
 
-    public void setLikeSize(Integer likeSize) {
-        this.likeSize = likeSize;
+    public void setVoteSize(Integer voteSize) {
+        this.voteSize = voteSize;
     }
 
     public List<Comment> getComments() {
@@ -206,6 +206,45 @@ public class Blog implements Serializable {
               this.comments.remove(index);
           }
         }
+    }
+
+    public List<Vote> getVotes() {
+        return votes;
+    }
+
+    public void setVotes(List<Vote> votes) {
+        this.votes = votes;
+        this.voteSize = this.votes.size();
+    }
+
+    public boolean addVote(Vote vote){
+        boolean isExist = false;
+        for (int index = 0; index < this.votes.size(); index++) {
+            if (this.votes.get(index).getUser().getId().equals(vote.getUser().getId())) {
+                isExist = true;
+                break;
+            }
+        }
+        if (!isExist) {
+            this.votes.add(vote);
+            this.voteSize = this.votes.size();
+        }
+
+        return isExist;
+    }
+
+    /**
+     * 取消点赞
+     * @param voteId
+     */
+    public void removeVote(Long voteId){
+        for (int index = 0; index < votes.size(); index++) {
+           if(voteId.equals(this.votes.get(index).getId())){
+               this.votes.remove(index);
+               break;
+           }
+        }
+        this.voteSize =this.votes.size();
     }
 
     public String getTags() {

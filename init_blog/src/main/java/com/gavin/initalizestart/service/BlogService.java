@@ -2,6 +2,7 @@ package com.gavin.initalizestart.service;
 
 import com.gavin.initalizestart.domain.Blog;
 import com.gavin.initalizestart.domain.User;
+import com.gavin.initalizestart.domain.Vote;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -68,4 +69,18 @@ public interface BlogService {
      * @param commetId
      */
     void removeComment(Long blogId, Long commetId);
+
+    /**
+     * 点赞
+     * @param blogID
+     * @return
+     */
+    Blog createVote(Long blogID);
+
+    /**
+     * 取消点赞
+     * @param blogId
+     * @param voteId
+     */
+    void removeVote(Long blogId,Long voteId);
 }

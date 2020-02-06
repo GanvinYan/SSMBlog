@@ -2,6 +2,7 @@ package com.gavin.initalizestart.controller;
 
 import com.gavin.initalizestart.domain.Blog;
 import com.gavin.initalizestart.domain.User;
+import com.gavin.initalizestart.domain.Vote;
 import com.gavin.initalizestart.service.BlogService;
 import com.gavin.initalizestart.service.UserService;
 import com.gavin.initalizestart.util.ConstraintViolationExceptionHandler;
@@ -108,6 +109,7 @@ public class UserSpaceController {
      * @return
      */
     @GetMapping("/{username}/avatar")
+	@PreAuthorize("authentication.name.equals(#username)") 
     public ModelAndView avatar(@PathVariable("username") String username, Model model) {
         User user = (User) userDetailsService.loadUserByUsername(username);
         model.addAttribute("user", user);
@@ -175,10 +177,21 @@ public class UserSpaceController {
                 isBlogOwner = true;
             }
         }
+		List<Vote> votes = blog.getVotes();
+		Vote currentVote = null; // 当前用户的点赞情况
+
+        if (principal != null) {
+            for (Vote vote : votes) {
+                if (vote.getUser().getUsername().equals(principal.getUsername())) {
+                    currentVote = vote;
+                    break;
+                }
+            }
+        }
 
         model.addAttribute("isBlogOwner", isBlogOwner);
         model.addAttribute("blogModel", blog);
-
+		model.addAttribute("currentVote",currentVote);
         return "/userspace/blog";
     }
 
@@ -236,8 +249,8 @@ public class UserSpaceController {
             return ResponseEntity.ok().body(new Response(false,e.getMessage()));
         }
 
-        String redireUrl = "/u/" + username + "/blogs/" + blog.getId();
-        return ResponseEntity.ok().body(new Response(true, "处理成功", redireUrl));
+        String redirectUrl = "/u/" + username + "/blogs/" + blog.getId();
+        return ResponseEntity.ok().body(new Response(true, "处理成功", redirectUrl));
     }
 
     /**

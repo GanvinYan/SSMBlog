@@ -3,6 +3,7 @@ package com.gavin.initalizestart.service.serviceImpl;
 import com.gavin.initalizestart.domain.Blog;
 import com.gavin.initalizestart.domain.Comment;
 import com.gavin.initalizestart.domain.User;
+import com.gavin.initalizestart.domain.Vote;
 import com.gavin.initalizestart.repository.BlogRepository;
 import com.gavin.initalizestart.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,6 +79,25 @@ public class BlogServiceImpl implements BlogService {
     public void removeComment(Long blogId, Long commetId) {
         Blog originalBlog = blogRepository.findOne(blogId);
         originalBlog.removeComment(commetId);
+        this.saveBlog(originalBlog);
+    }
+
+    @Override
+    public Blog createVote(Long blogID) {
+        Blog originalBlog = blogRepository.findOne(blogID);
+        User user =(User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Vote vote = new Vote(user);
+        boolean isExist = originalBlog.addVote(vote);
+        if(isExist){
+            throw new IllegalArgumentException("该用户已经点过赞了");
+        }
+        return this.saveBlog(originalBlog);
+    }
+
+    @Override
+    public void removeVote(Long blogId, Long voteId) {
+        Blog originalBlog = blogRepository.findOne(blogId);
+        originalBlog.removeVote(voteId);
         this.saveBlog(originalBlog);
     }
 }
