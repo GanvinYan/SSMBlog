@@ -81,11 +81,22 @@ public class Blog implements Serializable {
     @Column(name = "tags", length = 100)
     private String tags;  // 标签
 
+    /**
+     * 博客评论
+     */
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name ="blog_comment",joinColumns = @JoinColumn(name = "blog_id",referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name ="comment_id",referencedColumnName = "id"))
     private List<Comment> comments;
 
+    @OneToMany(cascade = CascadeType.ALL,fetch =FetchType.LAZY)
+    @JoinTable(name = "blog_vote", joinColumns = @JoinColumn(name = "blog_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "vote_id", referencedColumnName = "id"))
+    private List<Vote> votes;
+
+    @OneToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+    @JoinColumn(name="catalog_id")
+    private Catalog catalog;
 
     protected Blog() {
         // TODO Auto-generated constructor stub
@@ -253,5 +264,13 @@ public class Blog implements Serializable {
 
     public void setTags(String tags) {
         this.tags = tags;
+    }
+
+    public Catalog getCatalog() {
+        return catalog;
+    }
+
+    public void setCatalog(Catalog catalog) {
+        this.catalog = catalog;
     }
 }

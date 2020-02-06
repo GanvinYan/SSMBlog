@@ -1,9 +1,6 @@
 package com.gavin.initalizestart.service.serviceImpl;
 
-import com.gavin.initalizestart.domain.Blog;
-import com.gavin.initalizestart.domain.Comment;
-import com.gavin.initalizestart.domain.User;
-import com.gavin.initalizestart.domain.Vote;
+import com.gavin.initalizestart.domain.*;
 import com.gavin.initalizestart.repository.BlogRepository;
 import com.gavin.initalizestart.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,9 +44,10 @@ public class BlogServiceImpl implements BlogService {
         // 模糊查询
         title = "%" + title + "%";
         String tags = title;
-        Page<Blog> blogs = blogRepository.findByTitleLikeAndUserOrTagsLikeAndUserOrderByCreateTimeDesc(title, user,tags, pageable);
+        Page<Blog> blogs = blogRepository.findByTitleLikeAndUserOrTagsLikeAndUserOrderByCreateTimeDesc(title, user,tags,user, pageable);
         return blogs;
     }
+
 
     @Override
     public Page<Blog> listBlogsByTitleLikeAndSort(User user, String title, Pageable pageable) {
@@ -99,5 +97,12 @@ public class BlogServiceImpl implements BlogService {
         Blog originalBlog = blogRepository.findOne(blogId);
         originalBlog.removeVote(voteId);
         this.saveBlog(originalBlog);
+    }
+
+    @Override
+    public Page<Blog> listBlogsByCatalog(Catalog catalog, Pageable pageable) {
+
+        Page<Blog> blogs = blogRepository.findByCatalog(catalog, pageable);
+        return blogs;
     }
 }

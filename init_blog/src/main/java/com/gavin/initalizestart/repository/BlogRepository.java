@@ -1,6 +1,7 @@
 package com.gavin.initalizestart.repository;
 
 import com.gavin.initalizestart.domain.Blog;
+import com.gavin.initalizestart.domain.Catalog;
 import com.gavin.initalizestart.domain.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,7 +30,13 @@ public interface BlogRepository extends JpaRepository<Blog,Long> {
      * @param pageable
      * @return
      */
-    Page<Blog> findByTitleLikeAndUserOrTagsLikeAndUserOrderByCreateTimeDesc(String title,User user,String tags, Pageable pageable);
+    Page<Blog> findByTitleLikeAndUserOrTagsLikeAndUserOrderByCreateTimeDesc(String title,User user,String tags,User user2, Pageable pageable);
 
-
+    /**
+     * 根据分类查询博客列表
+     * @param catalog
+     * @param pageable
+     * @return
+     */
+    Page<Blog> findByCatalog(Catalog catalog, Pageable pageable);
 }

@@ -1,6 +1,7 @@
 package com.gavin.initalizestart.service;
 
 import com.gavin.initalizestart.domain.Blog;
+import com.gavin.initalizestart.domain.Catalog;
 import com.gavin.initalizestart.domain.User;
 import com.gavin.initalizestart.domain.Vote;
 import org.springframework.data.domain.Page;
@@ -41,6 +42,7 @@ public interface BlogService {
      * @return
      */
     Page<Blog> listBlogsByTitleLike(User user, String title, Pageable pageable);
+
 
     /**
      * 根据用户名进行分页模糊查询（最热）
@@ -83,4 +85,12 @@ public interface BlogService {
      * @param voteId
      */
     void removeVote(Long blogId,Long voteId);
+
+    /**
+     * 根据分类进行查询
+     * @param catalog
+     * @param pageable
+     * @return
+     */
+    Page<Blog> listBlogsByCatalog(Catalog catalog, Pageable pageable);
 }
