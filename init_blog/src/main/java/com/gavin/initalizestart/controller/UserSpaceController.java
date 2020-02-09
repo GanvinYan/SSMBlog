@@ -126,7 +126,7 @@ public class UserSpaceController {
     public String listBlogsByOrder(@PathVariable("username") String username,
                                    @RequestParam(value = "order", required = false, defaultValue = "new") String order,
                                    @RequestParam(value = "catalog", required = false) Long catalogId,
-                                   @RequestParam(value = "keyword", required = false) String keyword,
+                                   @RequestParam(value = "keyword", required = false,defaultValue = "") String keyword,
                                    @RequestParam(value = "async", required = false) boolean async,
                                    @RequestParam(value = "pageIndex", required = false, defaultValue = "0") int pageIndex,
                                    @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize, Model model) {
@@ -139,9 +139,9 @@ public class UserSpaceController {
             page = blogService.listBlogsByCatalog(catalog, pageable);
             order = "";
         } else if ("hot".equals(order)) { // 最热查询
-            Sort sort = new Sort(Sort.Direction.DESC, "reading", "comments", "likes");
+            Sort sort = new Sort(Sort.Direction.DESC, "readSize","commentSize","voteSize");
             Pageable pageable = new PageRequest(pageIndex, pageSize, sort);
-            page = blogService.listBlogsByTitleLikeAndSort(user, keyword, pageable);
+            page = blogService.  listBlogsByTitleLikeAndSort(user, keyword, pageable);
         } else if ("new".equals(order)) { // 最新查询
             Pageable pageable = new PageRequest(pageIndex, pageSize);
             page = blogService.listBlogsByTitleLike(user, keyword, pageable);
@@ -149,6 +149,7 @@ public class UserSpaceController {
 
         List<Blog> list = page.getContent();    // 当前所在页面数据列表
 
+        model.addAttribute("user", user);
         model.addAttribute("order", order);
         model.addAttribute("page", page);
         model.addAttribute("blogList", list);
@@ -245,9 +246,9 @@ public class UserSpaceController {
     @PreAuthorize("authentication.name.equals(#username)")
     public ResponseEntity<Response> saveBlog(@PathVariable("username") String username, @RequestBody Blog blog) {
        //对Catalog进行判空处理
-       if(blog.getCatalog().getId() == null){
-           return ResponseEntity.ok().body(new Response(false, "未选择分类"));
-       }
+//       if(blog.getCatalog().getId() == null){
+//           return ResponseEntity.ok().body(new Response(false, "未选择分类"));
+//       }
 
         try {
             //判断是修改还是新增
