@@ -7,6 +7,12 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
+/**
+ * Catalog 实体
+ * 
+ * @since 2020.02.09
+ * @author gang.yan
+ */
 @Entity
 public class Catalog implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -25,7 +31,7 @@ public class Catalog implements Serializable {
     @JoinColumn(name ="user_id")
     private  User user;
 
-    private Catalog(){
+	protected Catalog() {
 
     }
 

@@ -246,9 +246,9 @@ public class UserSpaceController {
     @PreAuthorize("authentication.name.equals(#username)")
     public ResponseEntity<Response> saveBlog(@PathVariable("username") String username, @RequestBody Blog blog) {
        //对Catalog进行判空处理
-//       if(blog.getCatalog().getId() == null){
-//           return ResponseEntity.ok().body(new Response(false, "未选择分类"));
-//       }
+       if(blog.getCatalog().getId() == null){
+           return ResponseEntity.ok().body(new Response(false, "未选择分类"));
+       }
 
         try {
             //判断是修改还是新增

@@ -215,8 +215,10 @@ public class Blog implements Serializable {
         for (int index= 0;index <this.comments.size();index ++){
           if(comments.get(index).getId().equals(commentId)){
               this.comments.remove(index);
+				break;
           }
         }
+			this.commentSize = this.comments.size();
     }
 
     public List<Vote> getVotes() {
@@ -249,7 +251,7 @@ public class Blog implements Serializable {
      * @param voteId
      */
     public void removeVote(Long voteId){
-        for (int index = 0; index < votes.size(); index++) {
+        for (int index = 0; index < this.votes.size(); index++) {
            if(voteId.equals(this.votes.get(index).getId())){
                this.votes.remove(index);
                break;

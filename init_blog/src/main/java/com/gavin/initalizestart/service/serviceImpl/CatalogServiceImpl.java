@@ -43,6 +43,6 @@ public class CatalogServiceImpl implements CatalogService {
 
     @Override
     public List<Catalog> listCatalogs(User user) {
-        return null;
+        return catalogRepository.findByUser(user);
     }
 }
