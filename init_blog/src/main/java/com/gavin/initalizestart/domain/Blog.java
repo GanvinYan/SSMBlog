@@ -79,7 +79,7 @@ public class Blog implements Serializable {
      * 标签
      */
     @Column(name = "tags", length = 100)
-    private String tags;  // 标签
+    private String tags;  // 标签 "a,b,c"
 
     /**
      * 博客评论

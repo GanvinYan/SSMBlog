@@ -68,8 +68,8 @@ $(function() {
 		    	"title": $('#title').val(), 
 		    	"summary": $('#summary').val() , 
 		    	"content": $('#md').val(),
-                "catalog":{"id":$('#catalogSelect').val()}
-
+                "catalog":{"id":$('#catalogSelect').val()},
+                "tags":$('.form-control-tag').val()
             }),
 			beforeSend: function(request) {
 			    request.setRequestHeader(csrfHeader, csrfToken); // 添加  CSRF Token 
@@ -81,12 +81,16 @@ $(function() {
 				 } else {
 					 toastr.error("error!"+data.message);
 				 }
-				 
 		     },
 		     error : function() {
 		    	 toastr.error("error!");
 		     }
 		})
  	})
- 	
+
+    //初始化标签
+    $('.form-control-tag').tagsInput({
+        'defaultText':'输入标签'
+    })
+
 });
