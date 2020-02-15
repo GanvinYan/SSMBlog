@@ -4,6 +4,9 @@ import com.gavin.initalizestart.domain.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Collection;
+import java.util.List;
+
 public interface UserService {
 
     /**
@@ -28,7 +31,7 @@ public interface UserService {
     void removeUser(Long id);
 
     /**
-     *
+     * 根据Id获取用户
      * @param id
      * @return
      */
@@ -42,4 +45,10 @@ public interface UserService {
      */
     Page<User> listUsersByNameLike(String name, Pageable pageable);
 
+    /**
+     * 根据用户名集合查询用户详细信息
+     * @param usernames
+     * @return
+     */
+    List<User> listUsersByUsernames(Collection<String> usernames);
 }

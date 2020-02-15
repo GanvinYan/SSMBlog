@@ -1,13 +1,17 @@
 package com.gavin.initalizestart.service.serviceImpl;
 
 import com.gavin.initalizestart.domain.*;
+import com.gavin.initalizestart.domain.es.EsBlog;
 import com.gavin.initalizestart.repository.BlogRepository;
 import com.gavin.initalizestart.service.BlogService;
+import com.gavin.initalizestart.service.EsBlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 
 /**
  * Blog 服务.
@@ -19,14 +23,33 @@ public class BlogServiceImpl implements BlogService {
     @Autowired
     private BlogRepository blogRepository;
 
+    @Autowired
+    private EsBlogService esBlogService;
+
+    @Transactional
     @Override
     public Blog saveBlog(Blog blog) {
-        return blogRepository.save(blog);
+        boolean isNew = (blog.getId() == null);
+        EsBlog esBlog = null;
+
+        Blog returnBlog = blogRepository.save(blog);
+        if(isNew){
+            esBlog = new EsBlog(returnBlog);
+        }else {
+            esBlog = esBlogService.getEsBlogByBlogId(blog.getId());
+            esBlog.update(returnBlog);
+        }
+
+        esBlogService.updateEsBlog(esBlog);
+        return returnBlog;
     }
 
+    @Transactional
     @Override
     public void removeBlog(Long id) {
         blogRepository.delete(id);
+        EsBlog esBlog = esBlogService.getEsBlogByBlogId(id);
+        esBlogService.removeEsBlog(esBlog.getId());
     }
 
     @Override
