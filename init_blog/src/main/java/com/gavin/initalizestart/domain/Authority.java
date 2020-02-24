@@ -5,7 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import javax.persistence.*;
 
 /**
- * @Description: TODO
+ * @Description: Authority 实体
  * @Author: gang.yan
  * @Date: 2019/11/10 10:56
  * @Version: 1.0
