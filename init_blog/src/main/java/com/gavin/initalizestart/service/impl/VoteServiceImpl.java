@@ -1,4 +1,4 @@
-package com.gavin.initalizestart.service.serviceImpl;
+package com.gavin.initalizestart.service.impl;
 
 import com.gavin.initalizestart.domain.Vote;
 import com.gavin.initalizestart.repository.VoteRepository;

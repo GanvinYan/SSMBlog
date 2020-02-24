@@ -1,7 +1,7 @@
 package com.gavin.initalizestart.vo;
 
 /**
- * @Description: TODO
+ * @Description: 菜单 值对象
  * @Author: gang.yan
  * @Date: 2019/11/10 18:22
  * @Version: 1.0
